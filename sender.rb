@@ -4,7 +4,7 @@ require 'json'
 require 'dotenv'
 Dotenv.load
 
-json_name = ENV.include?('JSON_NAME') ? ENV['JSON_NAME'] : 'users_list.json'
+json_name = ENV.fetch('JSON_NAME', 'users_list.json')
 
 unless File.exist?(json_name)
   f = File.open(json_name, 'w+')
