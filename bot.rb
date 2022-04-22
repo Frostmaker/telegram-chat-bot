@@ -3,6 +3,8 @@ require 'telegram/bot'
 require 'colorize'
 require './constants'
 require 'socket'
+require 'bundler/setup'
+Bundler.require(:default)
 
 threads = []
 

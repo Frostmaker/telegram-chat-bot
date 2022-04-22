@@ -13,10 +13,10 @@ text = ''
 user = nil
 puts '--- START SENDER ---'.colorize(:green)
 
-client = server.accept # Wait for a client to connect
+client = server.accept
 loop do
   unless user.nil?
-    client = server.accept # Wait for a client to connect
+    client = server.accept
   end
   while user.nil?
     json_file = File.read('users_list.json')
@@ -40,11 +40,3 @@ loop do
   end
   text = ''
 end
-
-# loop do
-#   print '>> '.colorize(:green)
-#   msg = gets.chomp
-#   file = File.open('message.txt', 'w+')
-#   file.write(msg)
-#   file.close
-# end
