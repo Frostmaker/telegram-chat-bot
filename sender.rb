@@ -2,6 +2,12 @@ require 'colorize'
 require 'socket'
 require 'json'
 
+unless File.exist?("users_list.json")
+  f = File.open("users_list.json", "w+")
+  f.write("{}")
+  f.close
+end
+
 server = TCPServer.new 2000 # Server bound to port 2000
 text = ''
 user = nil
