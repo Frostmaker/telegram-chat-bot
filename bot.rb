@@ -6,7 +6,7 @@ Dotenv.load
 
 threads = []
 TOKEN = ENV.fetch('TOKEN')
-json_name = ENV.include?('JSON_NAME') ? ENV['JSON_NAME'] : 'users_list.json'
+json_name = ENV.fetch('JSON_NAME', 'users_list.json')
 
 Telegram::Bot::Client.run(TOKEN) do |bot|
   puts '--- START BOT ---'.colorize(:green)
