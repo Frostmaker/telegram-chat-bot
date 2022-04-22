@@ -1,9 +1,13 @@
 require 'colorize'
 require 'socket'
 require 'json'
+require 'dotenv'
+Dotenv.load
 
-unless File.exist?('users_list.json')
-  f = File.open('users_list.json', 'w+')
+json_name = ENV.include?('JSON_NAME') ? ENV['JSON_NAME'] : 'users_list.json'
+
+unless File.exist?(json_name)
+  f = File.open(json_name, 'w+')
   f.write('{}')
   f.close
 end
@@ -17,7 +21,7 @@ client = server.accept
 loop do
   client = server.accept unless user.nil?
   while user.nil?
-    json_file = File.read('users_list.json')
+    json_file = File.read(json_name)
     json_file = JSON.parse json_file
     print "CHATS: \n".colorize(:blue)
     json_file.each_key { |key| puts key.colorize(:yellow) }
