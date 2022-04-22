@@ -1,19 +1,32 @@
-### Запуск
+## Запуск:
 
-1. Ввести токен бота в файл constants.rb
+1.
+
+```bash 
+$ git clone git@gitlab.edu.rnds.pro:efalin/telegram-ruby-bot-rnds.git
+$ cd telegram-ruby-bot-rnds
+$ git checkout dev 
+```
+
+
+2. Ввести токен бота в файл constants.rb
 
 ```ruby
 TOKEN = 'YOUR_TELEGRAM_BOT_API_TOKEN'
 ```
-2. Открыть паралелльно два терминала
 
-3. Запустить в первом файл sender.rb
+
+3. Открыть паралелльно два терминала
+
+
+4. Запустить в первом файл sender.rb
 
 ```bash
 $ ruby sender.rb
 ```
 
-4. Запустить во втором файл bot.rb
+
+5. Запустить во втором файл bot.rb
 
 ```bash
 $ ruby bot.rb
