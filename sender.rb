@@ -2,9 +2,9 @@ require 'colorize'
 require 'socket'
 require 'json'
 
-unless File.exist?("users_list.json")
-  f = File.open("users_list.json", "w+")
-  f.write("{}")
+unless File.exist?('users_list.json')
+  f = File.open('users_list.json', 'w+')
+  f.write('{}')
   f.close
 end
 
@@ -15,14 +15,12 @@ puts '--- START SENDER ---'.colorize(:green)
 
 client = server.accept
 loop do
-  unless user.nil?
-    client = server.accept
-  end
+  client = server.accept unless user.nil?
   while user.nil?
     json_file = File.read('users_list.json')
     json_file = JSON.parse json_file
     print "CHATS: \n".colorize(:blue)
-    json_file.keys.each { |key| puts key.colorize(:yellow) }
+    json_file.each_key { |key| puts key.colorize(:yellow) }
     print 'Choose your company: '
     user_name = gets.chomp
     user = json_file[user_name]
