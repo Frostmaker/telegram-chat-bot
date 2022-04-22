@@ -4,25 +4,35 @@ require 'json'
 
 server = TCPServer.new 2000 # Server bound to port 2000
 text = ''
+user = nil
 puts '--- START SENDER ---'.colorize(:green)
 
-json_file = File.read("users_list.json")
-json_file = JSON.parse json_file
-
-print "CHATS: \n".colorize(:blue)
-json_file.each {|key, val| puts key.colorize(:yellow)}
-
-user = nil
-
+client = server.accept # Wait for a client to connect
 loop do
-  client = server.accept    # Wait for a client to connect
-  while text.empty? do 
+  unless user.nil?
+    client = server.accept # Wait for a client to connect
+  end
+  while user.nil?
+    json_file = File.read('users_list.json')
+    json_file = JSON.parse json_file
+    print "CHATS: \n".colorize(:blue)
+    json_file.keys.each { |key| puts key.colorize(:yellow) }
+    print 'Choose your company: '
+    user_name = gets.chomp
+    user = json_file[user_name]
+  end
+  while text.empty?
     print '>> '.colorize(:green)
     text = gets.chomp
   end
-  client.puts text unless text.empty? || text.nil?
+  if text == '/q'
+    puts 'Выход из чата'
+    user = nil
+  else
+    client.puts user
+    client.puts text unless text.empty? || text.nil?
+  end
   text = ''
-  # client.close
 end
 
 # loop do

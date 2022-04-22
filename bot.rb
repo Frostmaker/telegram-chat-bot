@@ -24,22 +24,17 @@ Telegram::Bot::Client.run(TOKEN) do |bot|
       output.close
 
       print '['.colorize(:red) + Time.at(message.date).to_s[11..15].colorize(:red).to_s + ']'.colorize(:red) + " #{message.from.first_name.colorize(:blue)}#{message.from.last_name.nil? ? '' : ' ' + message.from.last_name.colorize(:blue)}: #{message}\n"
-      bot.api.send_message(chat_id: 343090191, text: message)
+      # bot.api.send_message(chat_id: 343090191, text: "#{message.chat.username}: #{message.chat.text)
     end
   end
   sender = Thread.new do
     loop do
       s = TCPSocket.new 'localhost', 2000
+      uid = s.gets
       line = s.gets
-      # puts line    
-      bot.api.send_message(chat_id: msg.chat.id, text: line) unless line.empty?
+      bot.api.send_message(chat_id: uid, text: line) unless line == '/q'
       s.close
     end
-
-
-    # message = msg
-    # print '>> '.colorize(:green)
-    # answer = gets.chomp
   end
   threads << reciever
   threads << sender
