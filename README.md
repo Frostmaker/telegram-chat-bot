@@ -5,14 +5,15 @@
 ```ruby
 TOKEN = 'YOUR_TELEGRAM_BOT_API_TOKEN'
 ```
+2. Открыть паралелльно два терминала
 
-2. Запустить файл sender.rb
+3. Запустить в первом файл sender.rb
 
 ```bash
 $ ruby sender.rb
 ```
 
-3. Запустить файл bot.rb
+4. Запустить во втором файл bot.rb
 
 ```bash
 $ ruby bot.rb
